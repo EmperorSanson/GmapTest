@@ -1,0 +1,4 @@
+<jboss-web>
+    <context-root>gmtwar</context-root>
+    <security-domain>java:/jaas/DBRealm</security-domain>
+</jboss-web>

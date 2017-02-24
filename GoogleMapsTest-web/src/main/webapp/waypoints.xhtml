@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<title>Waypoints in directions</title>
+	<h:outputStylesheet library="css" name="waypoint.css" />
+	<h:outputScript library="javascript" name="waypoint.js" />
+</h:head>
+<h:body>
+
+	<div id="map"></div>
+	<h:form id="mainform">
+		<div id="right-panel">
+			<div>
+				<b>Start:</b> 
+				<br /> 
+				<h:selectOneMenu value="#{waypointBean.selectStart}" id="start" >
+					<f:selectItems value="#{waypointBean.findStarts()}" var="c"
+   					itemLabel="#{c.fformattedAddress}aa" itemValue="#{c.locationPoint.latitude},#{c.locationPoint.longitude}" />
+				</h:selectOneMenu>
+				<br />
+				<b>Waypoints:</b> 
+				<br />
+				<h:selectManyListbox value="#{waypointBean.selectWaypoints}" id="waypoints" >
+					<f:selectItems value="#{waypointBean.findWaypoints()}" var="c"
+   					itemLabel="#{c.fformattedAddress}aa" itemValue="#{c.locationPoint.latitude},#{c.locationPoint.longitude}" />
+				</h:selectManyListbox>
+				<br /> 
+				<b>End:</b> 
+				<h:selectOneMenu  value="#{waypointBean.selectEnd}" id="end" >
+					<f:selectItems value="#{waypointBean.findEnds()}" var="c"
+   					itemLabel="#{c.fformattedAddress}aa" itemValue="#{c.locationPoint.latitude},#{c.locationPoint.longitude}" />
+				</h:selectOneMenu>
+				<br /> 
+				<br /> 
+				<input type="submit" id="submit" />
+			</div>
+			<div id="directions-panel"></div>
+		</div>
+		<script async="async" defer="defer"
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHtAMfNlBgOEs5bhvbsCuF5LrH_fJLByA&amp;callback=initMap">
+	    </script>
+		<div>
+			<h:commandButton action="#{waypointBean.testmaps()}" value="test" />
+		</div>
+	</h:form>
+</h:body>
+</html>
